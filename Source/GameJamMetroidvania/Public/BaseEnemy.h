@@ -7,6 +7,7 @@
 #include "BaseEnemy.generated.h"
 
 class UEnemyHealth;
+class UTextRenderComponent;
 
 UCLASS()
 class GAMEJAMMETROIDVANIA_API ABaseEnemy : public ACharacter
@@ -20,7 +21,10 @@ public:
 protected:
 
 	UPROPERTY(VisibleAnywere, BlueprintReadWrite, Category = "Components")
-	UEnemyHealth* EnemyHealth;
+	UEnemyHealth* EnemyHealthComponent;
+
+	UPROPERTY(VisibleAnywere, BlueprintReadWrite, Category = "Components")
+	UTextRenderComponent* HealthTextComponent;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
