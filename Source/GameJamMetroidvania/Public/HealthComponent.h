@@ -3,26 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-#include "EnemyHealth.generated.h"
+#include "Components/ActorComponent.h"
+#include "HealthComponent.generated.h"
 
-UCLASS()
-class GAMEJAMMETROIDVANIA_API AEnemyHealth : public ACharacter
+
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class GAMEJAMMETROIDVANIA_API UHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:
-	// Sets default values for this character's properties
-	AEnemyHealth();
+public:	
+	// Sets default values for this component's properties
+	UHealthComponent();
 
 	float GetHealth() const { return Health; }
 
 protected:
-
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	float MaxHealth = 100.0f;
 
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:

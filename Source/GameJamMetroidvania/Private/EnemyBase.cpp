@@ -2,6 +2,8 @@
 
 
 #include "EnemyBase.h"
+#include "HealthComponent.h"
+#include "Components/TextRenderComponent.h"
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -9,13 +11,16 @@ AEnemyBase::AEnemyBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>("HealthComponent");
+
+	HealthTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealthTextComponent");
+	HealthTextComponent->SetupAttachment(GetRootComponent());
 }
 
 // Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -23,6 +28,8 @@ void AEnemyBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	const auto Health = HealthComponent->GetHealth();
+	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0"), Health)));
 }
 
 // Called to bind functionality to input
