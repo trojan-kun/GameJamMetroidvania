@@ -4,6 +4,9 @@
 #include "EnemyBase.h"
 #include "HealthComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "Engine/DamageEvents.h"
+
+DEFINE_LOG_CATEGORY_STATIC(EnemyLog, All, All);
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -30,6 +33,8 @@ void AEnemyBase::Tick(float DeltaTime)
 
 	const auto Health = HealthComponent->GetHealth();
 	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0"), Health)));
+
+	TakeDamage(0.1f, FDamageEvent{}, Controller, this);
 }
 
 // Called to bind functionality to input
