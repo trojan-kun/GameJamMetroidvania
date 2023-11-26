@@ -36,8 +36,12 @@ void ABaseCharecter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABaseCharecter::MoveRight);
 }
 
-void ABaseCharecter::MoveForward(float Amount) {}
-void ABaseCharecter::MoveLeft(float Amount) {}
-void ABaseCharecter::MoveRight(float Amount) {}
+void ABaseCharecter::MoveForward(float Amount) {
+	AddMovementInput(GetActorForwardVector(), Amount);
+}
+
+void ABaseCharecter::MoveRight(float Amount) {
+	AddMovementInput(GetActorRightVector(), Amount);
+}
 
 
