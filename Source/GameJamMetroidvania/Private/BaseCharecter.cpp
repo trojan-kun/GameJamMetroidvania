@@ -2,6 +2,8 @@
 
 
 #include "BaseCharecter.h"
+#include "Camera/CameraComponent"
+#include "Components/InputComponent.h"
 
 // Sets default values
 ABaseCharecter::ABaseCharecter()
@@ -31,4 +33,9 @@ void ABaseCharecter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+void ABaseCharecter::MoveForward(float Amount) {}
+void ABaseCharecter::MoveLeft(float Amount) {}
+void ABaseCharecter::MoveRight(float Amount) {}
+
 
