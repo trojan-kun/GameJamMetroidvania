@@ -43,3 +43,4 @@ void ABasePlayer::MoveForward(float Amount) {
 void ABasePlayer::MoveRight(float Amount) {
 	AddMovementInput(GetActorRightVector(), Amount);
 }
+
