@@ -2,6 +2,8 @@
 
 
 #include "BasePlayer.h"
+#include "Camera/CameraComponent.h"
+#include "Components/InputComponent.h"
 
 // Sets default values
 ABasePlayer::ABasePlayer()
@@ -30,5 +32,14 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis("MoveForward", this, &ABasePlayer::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ABasePlayer::MoveRight);
 }
 
+void ABasePlayer::MoveForward(float Amount) {
+	AddMovementInput(GetActorForwardVector(), Amount);
+}
+
+void ABasePlayer::MoveRight(float Amount) {
+	AddMovementInput(GetActorRightVector(), Amount);
+}

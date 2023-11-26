@@ -29,5 +29,5 @@ public:
 private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);
-	void MoveLeft(float Amount);
+
 };
