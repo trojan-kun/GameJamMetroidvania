@@ -6,8 +6,8 @@
 #include "GameFramework/Character.h"
 #include "EnemyBase.generated.h"
 
-class UEnemyHealth;
-class UTextrenderComponent;
+class UHealthComponent;
+class UTextRenderComponent;
 
 UCLASS()
 class GAMEJAMMETROIDVANIA_API AEnemyBase : public ACharacter
@@ -21,10 +21,11 @@ public:
 
 protected:
 
-	//UPROPERTY(VisibleAnywhere,)
-	///UEnemyHealth* HealthComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UHealthComponent* HealthComponent;
 
-	//UTextRenderComponent* HealthTextComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	UTextRenderComponent* HealthTextComponent;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,9 +36,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-private:
-	void MoveForward(float Amount);
-	void MoveRight(float Amount);
-	void MoveLeft(float Amount);
 };
