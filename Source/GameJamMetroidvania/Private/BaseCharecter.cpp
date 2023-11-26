@@ -32,7 +32,6 @@ void ABaseCharecter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABaseCharecter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveLeft", this, &ABaseCharecter::MoveLeft);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABaseCharecter::MoveRight);
 }
 
