@@ -9,6 +9,8 @@ ABasePlayer::ABasePlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Health = DefaultHealth;
+
 }
 
 // Called when the game starts or when spawned
@@ -30,5 +32,20 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+float ABasePlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, 
+	class AController* EventInstigator, AActor* DamageCauser) 
+{
+	Health -= DamageAmount;
+	UE_LOG(LogTemp, Warning, TEXT("Health: % f"), Health);
+
+	if (Health > 0) {
+		UE_LOG(LogTemp, Warning, TEXT("You DEAD!"));
+
+		//ѕ≈резагрузка после смерти или что там у нас будет
+	}
+
+	return DamageAmount;
 }
 
