@@ -2,7 +2,7 @@
 
 
 #include "BaseCharecter.h"
-#include "Camera/CameraComponent"
+#include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 
 // Sets default values
@@ -31,7 +31,9 @@ void ABaseCharecter::Tick(float DeltaTime)
 void ABaseCharecter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	PlayerInputComponent->BindAxis("MoveForward", this, &ABaseCharecter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveLeft", this, &ABaseCharecter::MoveLeft);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ABaseCharecter::MoveRight);
 }
 
 void ABaseCharecter::MoveForward(float Amount) {}
