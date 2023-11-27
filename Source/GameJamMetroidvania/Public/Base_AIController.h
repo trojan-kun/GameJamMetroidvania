@@ -3,15 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/PlayerController.h"
+#include "AIController.h"
 #include "Base_AIController.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
-class GAMEJAMMETROIDVANIA_API ABase_AIController : public APlayerController
+class GAMEJAMMETROIDVANIA_API ABase_AIController : public AAIController
 {
 	GENERATED_BODY()
-	
+
+public:
+	explicit ABase_AIController(FObjectInitializer const& ObjectInitializer);
+
+protected:
+	virtual void OnPossess(APawn* InPawn) override;
 };

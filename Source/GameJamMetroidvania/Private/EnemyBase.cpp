@@ -17,6 +17,11 @@ AEnemyBase::AEnemyBase()
 	HealthTextComponent->SetupAttachment(GetRootComponent());
 }
 
+UBehaviorTree* AEnemyBase::GetBehaviorTree() const
+{
+	return Tree;
+}
+
 // Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()
 {

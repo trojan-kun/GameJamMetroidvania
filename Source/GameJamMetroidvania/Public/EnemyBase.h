@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BehaviorTree/BehaviorTree.h"
 #include "GameFramework/Character.h"
 #include "EnemyBase.generated.h"
 
@@ -19,6 +20,8 @@ public:
 	// Sets default values for this character's properties
 	AEnemyBase();
 
+	UBehaviorTree* GetBehaviorTree() const;
+
 protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
@@ -26,6 +29,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UTextRenderComponent* HealthTextComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
+	UBehaviorTree* Tree;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
