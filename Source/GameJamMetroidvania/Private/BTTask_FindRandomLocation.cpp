@@ -3,8 +3,8 @@
 
 #include "BTTask_FindRandomLocation.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Base_AIController.h"
 #include "NavigationSystem.h"
+#include "Base_AIController.h"
 
 UBTTask_FindRandomLocation::UBTTask_FindRandomLocation(FObjectInitializer const& ObjectInitializer)
 {
@@ -30,7 +30,7 @@ EBTNodeResult::Type UBTTask_FindRandomLocation::ExecuteTask(UBehaviorTreeCompone
 					OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), Loc.Location);
 				}
 
-				//finish with siccess
+				//finish with success
 				FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 				return EBTNodeResult::Succeeded;
 			}
