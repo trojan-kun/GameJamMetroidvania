@@ -35,4 +35,8 @@ private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);
 
+	class UAIPerceptionStimuliSourceComponent* StimulusSource;
+
+	void SetupStimulusSource();
+
 };

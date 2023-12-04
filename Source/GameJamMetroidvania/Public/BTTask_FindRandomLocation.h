@@ -16,7 +16,6 @@ class GAMEJAMMETROIDVANIA_API UBTTask_FindRandomLocation : public UBTTask_Blackb
 	
 public:
 	explicit UBTTask_FindRandomLocation(FObjectInitializer const& ObjectInitializer);
-
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 private:

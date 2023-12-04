@@ -4,6 +4,8 @@
 #include "BasePlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Sight.h"
 
 // Sets default values
 ABasePlayer::ABasePlayer()
@@ -11,7 +13,11 @@ ABasePlayer::ABasePlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+
+	SetupStimulusSource();
+
 	Health = DefaultHealth;
+
 
 }
 
@@ -46,6 +52,16 @@ void ABasePlayer::MoveRight(float Amount) {
 	AddMovementInput(GetActorRightVector(), Amount);
 }
 
+
+void ABasePlayer::SetupStimulusSource()
+{
+	StimulusSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimulus"));
+	if (StimulusSource)
+	{
+		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+		StimulusSource->RegisterWithPerceptionSystem();
+	}
+
 float ABasePlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, 
 	class AController* EventInstigator, AActor* DamageCauser) 
 {
@@ -55,9 +71,10 @@ float ABasePlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& Dam
 	if (Health > 0) {
 		UE_LOG(LogTemp, Warning, TEXT("You DEAD!"));
 
-		//ПЕрезагрузка после смерти или что там у нас будет
+		//ГЏГ…Г°ГҐГ§Г ГЈГ°ГіГ§ГЄГ  ГЇГ®Г±Г«ГҐ Г±Г¬ГҐГ°ГІГЁ ГЁГ«ГЁ Г·ГІГ® ГІГ Г¬ Гі Г­Г Г± ГЎГіГ¤ГҐГІ
 	}
 
 	return DamageAmount;
+
 }
 
