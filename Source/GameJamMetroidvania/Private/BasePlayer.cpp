@@ -13,7 +13,12 @@ ABasePlayer::ABasePlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+
 	SetupStimulusSource();
+
+	Health = DefaultHealth;
+
+
 }
 
 // Called when the game starts or when spawned
@@ -47,6 +52,7 @@ void ABasePlayer::MoveRight(float Amount) {
 	AddMovementInput(GetActorRightVector(), Amount);
 }
 
+
 void ABasePlayer::SetupStimulusSource()
 {
 	StimulusSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimulus"));
@@ -55,5 +61,20 @@ void ABasePlayer::SetupStimulusSource()
 		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
 		StimulusSource->RegisterWithPerceptionSystem();
 	}
+
+float ABasePlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, 
+	class AController* EventInstigator, AActor* DamageCauser) 
+{
+	Health -= DamageAmount;
+	UE_LOG(LogTemp, Warning, TEXT("Health: % f"), Health);
+
+	if (Health > 0) {
+		UE_LOG(LogTemp, Warning, TEXT("You DEAD!"));
+
+		//ÏÅðåçàãðóçêà ïîñëå ñìåðòè èëè ÷òî òàì ó íàñ áóäåò
+	}
+
+	return DamageAmount;
+
 }
 
