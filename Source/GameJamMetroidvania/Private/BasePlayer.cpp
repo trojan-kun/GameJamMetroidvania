@@ -4,6 +4,8 @@
 #include "BasePlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Sight.h"
 
 // Sets default values
 ABasePlayer::ABasePlayer()
@@ -11,6 +13,7 @@ ABasePlayer::ABasePlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	SetupStimulusSource();
 }
 
 // Called when the game starts or when spawned
@@ -42,5 +45,15 @@ void ABasePlayer::MoveForward(float Amount) {
 
 void ABasePlayer::MoveRight(float Amount) {
 	AddMovementInput(GetActorRightVector(), Amount);
+}
+
+void ABasePlayer::SetupStimulusSource()
+{
+	StimulusSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimulus"));
+	if (StimulusSource)
+	{
+		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+		StimulusSource->RegisterWithPerceptionSystem();
+	}
 }
 
