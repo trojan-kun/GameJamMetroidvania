@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "BasePlayer.generated.h"
 
+class UWeaponComp;
+
 UCLASS()
 class GAMEJAMMETROIDVANIA_API ABasePlayer : public ACharacter
 {
@@ -21,6 +23,9 @@ protected:
 
 	float Health = 0;
 	float DefaultHealth = 100;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Component")
+		UWeaponComp* WeaponComponent;
 
 public:	
 	// Called every frame
