@@ -21,6 +21,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
 	USkeletalMeshComponent* WeaponMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
+	FName Gun_socket = "gun_socket";
+
 	virtual void BeginPlay() override;
 
+	void MakeShot();
 };
