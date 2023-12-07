@@ -61,6 +61,7 @@ void ABasePlayer::SetupStimulusSource()
 		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
 		StimulusSource->RegisterWithPerceptionSystem();
 	}
+}
 
 float ABasePlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, 
 	class AController* EventInstigator, AActor* DamageCauser) 
@@ -68,7 +69,8 @@ float ABasePlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& Dam
 	Health -= DamageAmount;
 	UE_LOG(LogTemp, Warning, TEXT("Health: % f"), Health);
 
-	if (Health > 0) {
+	if (Health > 0) 
+	{
 		UE_LOG(LogTemp, Warning, TEXT("You DEAD!"));
 
 		//ÏÅðåçàãðóçêà ïîñëå ñìåðòè èëè ÷òî òàì ó íàñ áóäåò
