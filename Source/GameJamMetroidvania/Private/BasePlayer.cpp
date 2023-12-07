@@ -6,6 +6,7 @@
 #include "Components/InputComponent.h"
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Sight.h"
+#include "WeaponComp.h"
 
 // Sets default values
 ABasePlayer::ABasePlayer()
@@ -18,7 +19,7 @@ ABasePlayer::ABasePlayer()
 
 	Health = DefaultHealth;
 
-
+	WeaponComponent = CreateDefaultSubobject<UWeaponComp>("WeaponComponent");
 }
 
 // Called when the game starts or when spawned
@@ -39,9 +40,11 @@ void ABasePlayer::Tick(float DeltaTime)
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	check(WeaponComponent);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasePlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasePlayer::MoveRight);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, WeaponComponent, &UWeaponComp::Fire);
 }
 
 void ABasePlayer::MoveForward(float Amount) {
