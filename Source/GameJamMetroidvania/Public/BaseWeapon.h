@@ -21,8 +21,14 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
 	USkeletalMeshComponent* WeaponMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Component")
+		APlayerController* PC;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
-	FName Gun_socket = "gun_socket";
+	FName Gun_socket = "WeaponSocket";
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite);
+	float TraceMaxDistance = 15000000000.0f;
 
 	virtual void BeginPlay() override;
 

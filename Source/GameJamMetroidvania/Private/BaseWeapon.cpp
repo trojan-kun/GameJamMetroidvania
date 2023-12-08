@@ -6,17 +6,21 @@
 #include "GameFramework/Actor.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/World.h"
+#include "Components/InputComponent.h"
 #include "DrawDebugHelpers.h"
-
+#include "GameFramework/PlayerController.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogWeapon, All, All);
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>("WeaponMesh");
+	SetRootComponent(WeaponMesh);
+
+	PC = CreateDefaultSubobject<APlayerController>("PC");
 }
 
 void ABaseWeapon::Fire()
@@ -29,16 +33,28 @@ void ABaseWeapon::Fire()
 void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+
+	check(WeaponMesh);
 }
 
 void ABaseWeapon::MakeShot()
 {
-	if (GetWorld())return;
+	if (!GetWorld()) return;
 
 	const FTransform SocketTransform = WeaponMesh->GetSocketTransform(Gun_socket);
 	const FVector TraceStart = SocketTransform.GetLocation();
-	const FVector ShootDirection = SocketTransform.GetRotation().GetForwardVector();
-	const FVector TraceEnd = TraceStart + ShootDirection * 1500.0f;
+	float MouseX;
+	float MouseY;
+	PC->GetMousePosition(MouseX, MouseY);
+	UE_LOG(LogTemp, Warning, TEXT("The boolean value is %s"), (PC->GetMousePosition(MouseX, MouseY) ? TEXT("true") : TEXT("false")));
+	UE_LOG(LogWeapon, Display, TEXT("Mouse X %s"), MouseX);
+	UE_LOG(LogWeapon, Display, TEXT("Mouse Y %s"), MouseY);
+
+	const FVector ShootDirection(MouseX, MouseY, TraceStart.Z);
+	const FVector TraceEnd = TraceStart + ShootDirection * TraceMaxDistance;
+
+	UE_LOG(LogWeapon, Display, TEXT("Making Shot %s"), *TraceStart.ToString());
+	UE_LOG(LogWeapon, Display, TEXT("Mouse at %s"), *ShootDirection.ToString());
 
 	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 3.0f, 0, 3.0f);
 

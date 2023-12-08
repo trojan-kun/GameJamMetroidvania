@@ -26,7 +26,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 		TSubclassOf<ABaseWeapon> WeaponClass;
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
-		FName WeaponAttachP = "WeaponSocket";
+		FName WeaponAttachP = "gun_socket";
 
 public:	
 
