@@ -12,6 +12,7 @@ UWeaponComp::UWeaponComp()
 
 }
 
+
 void UWeaponComp::BeginPlay()
 {
 	Super::BeginPlay();
