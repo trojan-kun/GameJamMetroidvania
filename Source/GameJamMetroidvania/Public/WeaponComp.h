@@ -17,7 +17,6 @@ class GAMEJAMMETROIDVANIA_API UWeaponComp : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UWeaponComp();
-
 	void Fire();
 
 protected:
