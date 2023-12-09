@@ -21,8 +21,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
 	USkeletalMeshComponent* WeaponMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Component")
-		APlayerController* PC;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	APlayerController* PC; /*= Cast<APlayerController>(GetController());*/
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
 	FName Gun_socket = "WeaponSocket";
