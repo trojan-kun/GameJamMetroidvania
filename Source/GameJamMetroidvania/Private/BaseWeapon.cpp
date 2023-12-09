@@ -20,7 +20,7 @@ ABaseWeapon::ABaseWeapon()
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>("WeaponMesh");
 	SetRootComponent(WeaponMesh);
 
-	PC = CreateDefaultSubobject<APlayerController>("BP_PLayerController");
+	PC = CreateDefaultSubobject<APlayerController>("PC");
 }
 
 void ABaseWeapon::Fire()
@@ -45,17 +45,17 @@ void ABaseWeapon::MakeShot()
 	const FVector TraceStart = SocketTransform.GetLocation();
 	float MouseX;
 	float MouseY;
-	
 	PC->GetMousePosition(MouseX, MouseY);
-	PC->bShowMouseCursor = false;
-
 	UE_LOG(LogTemp, Warning, TEXT("The boolean value is %s"), (PC->GetMousePosition(MouseX, MouseY) ? TEXT("true") : TEXT("false")));
 	UE_LOG(LogWeapon, Display, TEXT("Mouse X %s"), MouseX);
 	UE_LOG(LogWeapon, Display, TEXT("Mouse Y %s"), MouseY);
 
 	const FVector ShootDirection(MouseX, MouseY, TraceStart.Z);
 	const FVector TraceEnd = TraceStart + ShootDirection * TraceMaxDistance;
-	PC->bShowMouseCursor = true;
+
+	UE_LOG(LogWeapon, Display, TEXT("Making Shot %s"), *TraceStart.ToString());
+	UE_LOG(LogWeapon, Display, TEXT("Mouse at %s"), *ShootDirection.ToString());
+
 	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 3.0f, 0, 3.0f);
 
 }
